@@ -7,11 +7,14 @@ import java.util.Scanner;
  */
 public class menu {
     /**
-     * defined a constructor
+     * defined an empty constructor
      */
     public static void menu(){
     }
 
+    /**
+     * Will run the main program
+     */
     public static void main(String[] args) {
         menu m = new menu();
         m.selector();
@@ -45,19 +48,45 @@ public class menu {
             int selection = sc.nextInt();
             sc.nextLine();
             switch (selection) { //runs the corresponding process to the user input
-                case 1 -> runningQuiz();
-                case 2 -> createQuiz();
-                case 3 -> readQuiz();
-                case 4 -> updateQuiz();
-                case 5 -> deleteQuiz();
-                case 6 -> createQuestion();
-                case 7 -> readQuestion();
-                case 8 -> updateQuestion();
-                case 9 -> deleteQuestion();
-                case 10 -> importQuiz();
-                case 11 -> exportQuiz();
-                case 12 -> viewIncorrectQuestions();
-                case 13 -> loop = false;
+                case 1:
+                    runningQuiz();
+                    break;
+                case 2:
+                    createQuiz();
+                    break;
+                case 3:
+                    readQuiz();
+                    break;
+                case 4:
+                    updateQuiz();
+                    break;
+                case 5:
+                    deleteQuiz();
+                    break;
+                case 6:
+                    createQuestion();
+                    break;
+                case 7:
+                    readQuestion();
+                    break;
+                case 8:
+                    updateQuestion();
+                    break;
+                case 9:
+                    deleteQuestion();
+                    break;
+                case 10:
+                    importQuiz();
+                    break;
+                case 11:
+                    exportQuiz();
+                    break;
+                case 12:
+                    viewIncorrectQuestions();
+                    break;
+                case 13:
+                    loop = false;
+                    break;
             }
         }
     }
