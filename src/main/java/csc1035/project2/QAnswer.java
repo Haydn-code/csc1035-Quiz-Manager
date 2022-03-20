@@ -30,6 +30,10 @@ public class QAnswer {
         this.correct = correct;
     }
 
+    public QAnswer() {
+
+    }
+
     public int getAnswerID() {
         return answerID;
     }

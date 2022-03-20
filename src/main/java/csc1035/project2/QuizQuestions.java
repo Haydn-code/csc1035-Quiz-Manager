@@ -25,6 +25,10 @@ public class QuizQuestions {
         this.QuizID = QuizID;
     }
 
+    public QuizQuestions() {
+
+    }
+
     public int getQQJD() {
         return QQJD;
     }

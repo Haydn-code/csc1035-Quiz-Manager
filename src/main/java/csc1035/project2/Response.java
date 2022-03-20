@@ -33,6 +33,10 @@ public class Response {
         this.result = result;
     }
 
+    public Response() {
+
+    }
+
     public int getResponseID() {
         return responseID;
     }

@@ -45,6 +45,10 @@ public class Question {
         this.rAnswers = rAnswers;
     }
 
+    public Question() {
+
+    }
+
     public List<RAnswer> getrAnswers() {
         return rAnswers;
     }

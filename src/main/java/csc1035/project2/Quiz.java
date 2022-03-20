@@ -28,6 +28,10 @@ public class Quiz {
         this.responses = responses;
     }
 
+    public Quiz() {
+
+    }
+
     public List<Response> getResponses() {
         return responses;
     }
