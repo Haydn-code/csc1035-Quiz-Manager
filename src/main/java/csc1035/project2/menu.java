@@ -9,7 +9,7 @@ public class menu {
     /**
      * defined an empty constructor
      */
-    public static void menu(){
+    public menu(){
     }
 
     /**
