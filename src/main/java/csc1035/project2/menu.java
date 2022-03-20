@@ -38,7 +38,9 @@ public class menu {
         System.out.println("10. Import Quiz");
         System.out.println("11. Export Quiz");
         System.out.println("12. View previously incorrect questions");
-        System.out.println("13. Exit");
+        System.out.println("13. Return All questions");
+        System.out.println("14. Search Questions");
+        System.out.println("15. Exit");
         boolean loop = true;
         while (loop) { //will return to the menu after every process has finished unless exit is selected
             while (!sc.hasNextInt()) { //checks the input is an integer
@@ -85,6 +87,12 @@ public class menu {
                     viewIncorrectQuestions();
                     break;
                 case 13:
+                    outputAllQuestions();
+                    break;
+                case 14:
+                    searchQuestions();
+                    break;
+                case 15:
                     loop = false;
                     break;
             }
@@ -124,6 +132,12 @@ public class menu {
         //will implement function from other class
     }
     private void viewIncorrectQuestions(){
+        //will implement function from other class
+    }
+    private void outputAllQuestions(){
+        //will implement function from other class
+    }
+    private void searchQuestions(){
         //will implement function from other class
     }
 }
