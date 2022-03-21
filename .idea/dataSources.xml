@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="team36" uuid="42f0cf5c-f0c7-4324-bcd0-5da73831c708">
-      <driver-ref>mariadb</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mariadb://cs-db.ncl.ac.uk:3306/csc1035_team36</jdbc-url>
-      <driver-properties>
-        <property name="autoReconnect" value="true" />
-      </driver-properties>
-    </data-source>
     <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="22e13e05-7b56-43c4-bd0c-004a89f16bda">
-      <driver-ref>mysql</driver-ref>
+      <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>Hibernate
 
 C:/Users/Offbe/IdeaProjects/CSC1035_Team36_21-22/src/main/resources/hibernate.cfg.xml</remarks>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://cs-db.ncl.ac.uk/csc1035_team36</jdbc-url>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://cs-db.ncl.ac.uk:3306/csc1035_team36</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
