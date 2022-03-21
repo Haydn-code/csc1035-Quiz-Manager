@@ -19,7 +19,8 @@ public class queryDatabase {
      * @return - all the questions entities from the database
      */
     public static Query returnAllQuestions(){
-        Session s = HibernateUtil.getSessionFactory().openSession();
+        Session s = HibernateUtil.getSessionFactory().openSession();//opens a session and searches for all entities of
+        // the questions class
         s.beginTransaction();
         Query returnAllQuestions = s.createQuery("from questions");
         s.getTransaction().commit();
@@ -37,23 +38,24 @@ public class queryDatabase {
         System.out.println("1. Search by question ID");
         System.out.println("2. Search by type");
         System.out.println("3. Search by topic");
-        while (true) {
+        while (true) { //if the user has input an integer outside 1 to 3 will loop back to start
             while (!sc.hasNextInt()) { //checks the input is an integer
-                System.out.println("Please enter an int 1-13");
+                System.out.println("Please enter an int 1-3");
                 sc.nextLine();
             }
             int selection = sc.nextInt();
             sc.nextLine();
-            switch (selection) {
+            switch (selection) { //selects the corresponding option to the user input
                 case 1:
                     s.beginTransaction();
                     System.out.println("Please enter the question ID you would like to search for?");
-                    while (!sc.hasNextInt()) {
+                    while (!sc.hasNextInt()) { //ensures the questionID is an integer
                         System.out.println("Please enter and integer");
                         sc.nextLine();
                     }
                     int questionID = sc.nextInt();
                     sc.nextLine();
+                    //creates a query based of the user input
                     Query searchQuestionID = s.createQuery("from questions q where q.questionID = " + questionID);
                     s.getTransaction().commit();
                     return searchQuestionID;
@@ -61,20 +63,21 @@ public class queryDatabase {
                     s.beginTransaction();
                     boolean valid = false;
                     String type = null;
-                    while (!valid) {
+                    while (!valid) { //ensures that the user input is one of the two enum types in the database
                         System.out.println("Please enter the type of question you would like to search for (mcq or saq");
                         type = sc.nextLine();
                         if (type == "mcq" || type == "saq") {
                             valid = true;
                         }
                     }
-                    Query searchType = s.createQuery("from questions q where q.type = " + type);
+                    Query searchType = s.createQuery("from questions q where q.type = " + type); //creates query
+                    //based of user inputs
                     s.getTransaction().commit();
                     return searchType;
                 case 3:
                     s.beginTransaction();
                     System.out.println("Please enter the topic of question you wish to search for");
-                    String topic = sc.nextLine();
+                    String topic = sc.nextLine(); //uses the user input to create a query for the specified topic
                     Query searchTopic = s.createQuery("from questions q where q.topic = " + topic);
                     s.getTransaction().commit();
                     return searchTopic;
@@ -88,7 +91,7 @@ public class queryDatabase {
      */
     public static Query viewIncorrectQuestions(){
         Session s = HibernateUtil.getSessionFactory().openSession();
-        s.beginTransaction();
+        s.beginTransaction(); //creates a query that returns a list of question with incorrect responses
         Query incorrectQuestions = s.createQuery("from questions q where " +
                 "q.questionID = responseAnswers.questionID.questionID and responseAnswers.correct = false");
         s.getTransaction().commit();

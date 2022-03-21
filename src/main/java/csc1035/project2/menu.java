@@ -138,7 +138,7 @@ public class menu {
      * @param q - the type of query the user wishes to run
      */
     private void searchQuestions(Query q){
-        for (Object i: q.getResultList()){
+        for (Object i: q.getResultList()){ //iterates through the results of the query and prints to the console
             Question q2 = (Question) i;
             System.out.println(q2);
         }
