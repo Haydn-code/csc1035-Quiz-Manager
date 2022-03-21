@@ -15,7 +15,10 @@ public class queryDatabase {
     }
     public static Query returnAllQuestions(){
         Session s = HibernateUtil.getSessionFactory().openSession();
-        return s.createQuery("from questions");
+        s.beginTransaction();
+        Query returnAllQuestions = s.createQuery("from questions");
+        s.getTransaction().commit();
+        return returnAllQuestions;
     }
     public static Query searchQuestions(){
         Session s = HibernateUtil.getSessionFactory().openSession();
