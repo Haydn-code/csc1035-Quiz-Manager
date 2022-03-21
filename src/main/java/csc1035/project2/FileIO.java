@@ -65,5 +65,18 @@ public class FileIO {
             System.out.println("Failed to export questions to file.");
         }
     }
+    public void mnuImport(){
+        System.out.println("\n--Question Import--");
+        System.out.println("Choose a json file you wish to import questions from. To import from the exports directory, type 'exports/{you-file-name-here}'");
+        System.out.println("\n File:");
+        Scanner scanner = new Scanner(System.in);
+        String fileName = scanner.nextLine();
+        try{
+            ImportQuestions(fileName);
+            System.out.println("Successfully imported questions from "+fileName);
+        } catch (Exception E){
+            System.out.println("failed to import questions from "+fileName+"\nDetails: "+E);
+        }
+    }
 
 }
