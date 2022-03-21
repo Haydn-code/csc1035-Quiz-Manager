@@ -112,6 +112,16 @@ public class Question {
     public void setqAnswers(List<QAnswer> qAnswers) {
         this.qAnswers = qAnswers;
     }
+
+    @Override
+    public String toString(){
+        String toString =  "Question{ID: " + this.questionID + ",Type: " + this.type + ",Score: " + this.score + ",Topic: "
+                + this.topic + ",Title: " + this.title + ",Answers: ";
+        for (QAnswer a : this.qAnswers){
+            toString = toString + a;
+        }
+        return toString;
+    }
 }
 
 // done
