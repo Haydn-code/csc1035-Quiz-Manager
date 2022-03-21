@@ -14,7 +14,9 @@ public class queryDatabase {
     public queryDatabase(){
     }
     public static Query returnAllQuestions(){
-        Session
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query returnAllQuestions = s.createQuery("from questions");
+        return returnAllQuestions;
     }
     public static Query searchQuestions(){
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -67,6 +69,5 @@ public class queryDatabase {
     }
     public static Query viewIncorrectQuestions(){
     }
-    public static Query randomQuestions(int size){
-    }
+
 }
