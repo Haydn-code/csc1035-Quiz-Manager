@@ -15,8 +15,7 @@ public class queryDatabase {
     }
     public static Query returnAllQuestions(){
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query returnAllQuestions = s.createQuery("from questions");
-        return returnAllQuestions;
+        return s.createQuery("from questions");
     }
     public static Query searchQuestions(){
         Session s = HibernateUtil.getSessionFactory().openSession();
