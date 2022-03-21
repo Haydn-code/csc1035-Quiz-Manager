@@ -24,6 +24,7 @@ public class queryDatabase {
         s.beginTransaction();
         Query returnAllQuestions = s.createQuery("from questions");
         s.getTransaction().commit();
+        s.close();
         return returnAllQuestions;
     }
 
@@ -58,6 +59,7 @@ public class queryDatabase {
                     //creates a query based of the user input
                     Query searchQuestionID = s.createQuery("from questions q where q.questionID = " + questionID);
                     s.getTransaction().commit();
+                    s.close();
                     return searchQuestionID;
                 case 2:
                     s.beginTransaction();
@@ -73,6 +75,7 @@ public class queryDatabase {
                     Query searchType = s.createQuery("from questions q where q.type = " + type); //creates query
                     //based of user inputs
                     s.getTransaction().commit();
+                    s.close();
                     return searchType;
                 case 3:
                     s.beginTransaction();
@@ -80,6 +83,7 @@ public class queryDatabase {
                     String topic = sc.nextLine(); //uses the user input to create a query for the specified topic
                     Query searchTopic = s.createQuery("from questions q where q.topic = " + topic);
                     s.getTransaction().commit();
+                    s.close();
                     return searchTopic;
             }
         }
@@ -95,6 +99,7 @@ public class queryDatabase {
         Query incorrectQuestions = s.createQuery("from questions q where " +
                 "q.questionID = responseAnswers.questionID.questionID and responseAnswers.correct = false");
         s.getTransaction().commit();
+        s.close();
         return incorrectQuestions;
     }
 
