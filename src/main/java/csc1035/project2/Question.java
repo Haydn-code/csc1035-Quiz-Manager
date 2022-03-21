@@ -115,12 +115,13 @@ public class Question {
 
     @Override
     public String toString(){
-        String toString =  "Question{ID: " + this.questionID + ",Type: " + this.type + ",Score: " + this.score + ",Topic: "
-                + this.topic + ",Title: " + this.title + ",Answers: ";
+        StringBuilder toString = new StringBuilder("Question{ID: " + this.questionID + ",Type: " + this.type +
+                ",Score: " + this.score + ",Topic: " + this.topic + ",Title: " + this.title + ",Answers: ");
         for (QAnswer a : this.qAnswers){
-            toString = toString + a;
+            toString.append(a);
         }
-        return toString;
+        toString.append("}");
+        return toString.toString();
     }
 }
 
