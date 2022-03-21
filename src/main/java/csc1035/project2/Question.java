@@ -45,6 +45,10 @@ public class Question {
         this.rAnswers = rAnswers;
     }
 
+    public Question() {
+
+    }
+
     public List<RAnswer> getrAnswers() {
         return rAnswers;
     }
@@ -107,6 +111,17 @@ public class Question {
 
     public void setqAnswers(List<QAnswer> qAnswers) {
         this.qAnswers = qAnswers;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder toString = new StringBuilder("Question{ID: " + this.questionID + ",Type: " + this.type +
+                ",Score: " + this.score + ",Topic: " + this.topic + ",Title: " + this.title + ",Answers: ");
+        for (QAnswer a : this.qAnswers){
+            toString.append(a);
+        }
+        toString.append("}");
+        return toString.toString();
     }
 }
 

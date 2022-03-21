@@ -1,5 +1,6 @@
 package csc1035.project2;
 
+import org.hibernate.query.Query;
 import java.util.Scanner;
 
 /**
@@ -9,7 +10,7 @@ public class menu {
     /**
      * defined an empty constructor
      */
-    public static void menu(){
+    public menu(){
     }
 
     /**
@@ -38,7 +39,9 @@ public class menu {
         System.out.println("10. Import Quiz");
         System.out.println("11. Export Quiz");
         System.out.println("12. View previously incorrect questions");
-        System.out.println("13. Exit");
+        System.out.println("13. Return All questions");
+        System.out.println("14. Search Questions");
+        System.out.println("15. Exit");
         boolean loop = true;
         while (loop) { //will return to the menu after every process has finished unless exit is selected
             while (!sc.hasNextInt()) { //checks the input is an integer
@@ -82,9 +85,15 @@ public class menu {
                     exportQuiz();
                     break;
                 case 12:
-                    viewIncorrectQuestions();
+                    searchQuestions(queryDatabase.viewIncorrectQuestions());
                     break;
                 case 13:
+                    searchQuestions(queryDatabase.returnAllQuestions());
+                    break;
+                case 14:
+                    searchQuestions(queryDatabase.searchQuestions());
+                    break;
+                case 15:
                     loop = false;
                     break;
             }
@@ -123,7 +132,15 @@ public class menu {
     private void exportQuiz(){
         //will implement function from other class
     }
-    private void viewIncorrectQuestions(){
-        //will implement function from other class
+
+    /**
+     * prints the results of a questions query to the console
+     * @param q - the type of query the user wishes to run
+     */
+    private void searchQuestions(Query q){
+        for (Object i: q.getResultList()){ //iterates through the results of the query and prints to the console
+            Question q2 = (Question) i;
+            System.out.println(q2);
+        }
     }
 }

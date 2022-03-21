@@ -30,6 +30,10 @@ public class QAnswer {
         this.correct = correct;
     }
 
+    public QAnswer() {
+
+    }
+
     public int getAnswerID() {
         return answerID;
     }
@@ -60,6 +64,11 @@ public class QAnswer {
 
     public void setCorrect(boolean correct) {
         this.correct = correct;
+    }
+
+    @Override
+    public String toString(){
+        return "QAnswer{ID: " + this.answerID + ",Value: " + this.value + ",Correct: " + this.correct + "}";
     }
 }
 // done

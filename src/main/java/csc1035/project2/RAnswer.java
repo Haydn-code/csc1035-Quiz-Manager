@@ -39,6 +39,10 @@ public class RAnswer {
         this.score = score;
     }
 
+    public RAnswer() {
+
+    }
+
     public int getARID() {
         return ARID;
     }
