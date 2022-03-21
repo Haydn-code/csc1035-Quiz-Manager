@@ -52,5 +52,18 @@ public class FileIO {
             return Collections.emptyList();
         }
     }
+    public void mnuExport(List<Question> questions){
+        System.out.println("\n--Question Export--");
+        System.out.println("file will be exported in JSON format to the 'exports' directory.");
+        System.out.println("\nEnter File Name:  (leave this blank if you want to use the default)");
+        Scanner scanner = new Scanner(System.in);
+        String fileName = scanner.nextLine();
+        try {
+            ExportQuestions(questions,fileName);
+            System.out.println("Successfully exported questions");
+        } catch (IOException IOE){
+            System.out.println("Failed to export questions to file.");
+        }
+    }
 
 }
