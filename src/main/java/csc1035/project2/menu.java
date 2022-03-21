@@ -1,5 +1,6 @@
 package csc1035.project2;
 
+import org.hibernate.query.Query;
 import java.util.Scanner;
 
 /**
@@ -84,13 +85,13 @@ public class menu {
                     exportQuiz();
                     break;
                 case 12:
-                    viewIncorrectQuestions();
+                    searchQuestions(queryDatabase.viewIncorrectQuestions());
                     break;
                 case 13:
-                    outputAllQuestions();
+                    searchQuestions(queryDatabase.returnAllQuestions());
                     break;
                 case 14:
-                    searchQuestions();
+                    searchQuestions(queryDatabase.searchQuestions());
                     break;
                 case 15:
                     loop = false;
@@ -131,13 +132,15 @@ public class menu {
     private void exportQuiz(){
         //will implement function from other class
     }
-    private void viewIncorrectQuestions(){
-        //will implement function from other class
-    }
-    private void outputAllQuestions(){
-        //will implement function from other class
-    }
-    private void searchQuestions(){
-        //will implement function from other class
+
+    /**
+     * prints the results of a questions query to the console
+     * @param q - the type of query the user wishes to run
+     */
+    private void searchQuestions(Query q){
+        for (Object i: q.getResultList()){
+            Question q2 = (Question) i;
+            System.out.println(q2);
+        }
     }
 }
