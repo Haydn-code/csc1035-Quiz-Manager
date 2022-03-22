@@ -2,6 +2,9 @@ package csc1035.project2;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -135,6 +138,16 @@ public class menu {
     }
     private void exportQuiz(){
         //will implement function from other class
+        List<Question> questions = new ArrayList<>();
+        Query q = queryDatabase.returnAllQuestions(s);
+        for (Object i: q.getResultList()){ //iterates through the results of the query and prints to the console
+            Question q2 = (Question) i;
+            questions.add(q2);
+        }
+        System.out.println(questions);
+        FileIO FIO = new FileIO();
+        FIO.mnuExport(questions);
+
     }
 
     /**
