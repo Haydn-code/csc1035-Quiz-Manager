@@ -6,7 +6,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:22/csc1035_team36</property>
+        <property name="hibernate.connection.url">jdbc:mysql://cs-db.ncl.ac.uk/csc1035_team36</property>
         <property name="hibernate.connection.username">csc1035_team36</property>
         <property name="hibernate.connection.password">Ink-Aid+!Pro</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
