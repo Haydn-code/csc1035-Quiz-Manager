@@ -1,5 +1,6 @@
 package csc1035.project2;
 
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import java.util.Scanner;
 
@@ -7,6 +8,8 @@ import java.util.Scanner;
  * A class which will provide an interface giving the user options for what they want to do
  */
 public class menu {
+
+    final public Session s = HibernateUtil.getSessionFactory().openSession();
     /**
      * defined an empty constructor
      */
@@ -26,26 +29,26 @@ public class menu {
      */
     private void selector() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Menu please enter an int 1-13:"); //displays menu options to user
-        System.out.println("1. Run Quiz");
-        System.out.println("2. Create Quiz");
-        System.out.println("3. Read Quiz");
-        System.out.println("4. Update Quiz");
-        System.out.println("5. Delete Quiz");
-        System.out.println("6. Create Question");
-        System.out.println("7. Read Question");
-        System.out.println("8. Update Question");
-        System.out.println("9. Delete Question");
-        System.out.println("10. Import Quiz");
-        System.out.println("11. Export Quiz");
-        System.out.println("12. View previously incorrect questions");
-        System.out.println("13. Return All questions");
-        System.out.println("14. Search Questions");
-        System.out.println("15. Exit");
         boolean loop = true;
         while (loop) { //will return to the menu after every process has finished unless exit is selected
+            System.out.println("Menu please enter an int 1-15:"); //displays menu options to user
+            System.out.println("1. Run Quiz");
+            System.out.println("2. Create Quiz");
+            System.out.println("3. Read Quiz");
+            System.out.println("4. Update Quiz");
+            System.out.println("5. Delete Quiz");
+            System.out.println("6. Create Question");
+            System.out.println("7. Read Question");
+            System.out.println("8. Update Question");
+            System.out.println("9. Delete Question");
+            System.out.println("10. Import Quiz");
+            System.out.println("11. Export Quiz");
+            System.out.println("12. View previously incorrect questions");
+            System.out.println("13. Return All questions");
+            System.out.println("14. Search Questions");
+            System.out.println("15. Exit");
             while (!sc.hasNextInt()) { //checks the input is an integer
-                System.out.println("Please enter an int 1-13");
+                System.out.println("Please enter an int 1-15");
                 sc.nextLine();
             }
             int selection = sc.nextInt();
@@ -85,16 +88,17 @@ public class menu {
                     exportQuiz();
                     break;
                 case 12:
-                    searchQuestions(queryDatabase.viewIncorrectQuestions());
+                    searchQuestions(queryDatabase.viewIncorrectQuestions(s));
                     break;
                 case 13:
-                    searchQuestions(queryDatabase.returnAllQuestions());
+                    searchQuestions(queryDatabase.returnAllQuestions(s));
                     break;
                 case 14:
-                    searchQuestions(queryDatabase.searchQuestions());
+                    searchQuestions(queryDatabase.searchQuestions(s));
                     break;
                 case 15:
                     loop = false;
+                    s.close();
                     break;
             }
         }
@@ -142,5 +146,6 @@ public class menu {
             Question q2 = (Question) i;
             System.out.println(q2);
         }
+
     }
 }

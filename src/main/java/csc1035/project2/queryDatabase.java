@@ -18,13 +18,10 @@ public class queryDatabase {
      * A method that returns all questions entities from the database
      * @return - all the questions entities from the database
      */
-    public static Query returnAllQuestions(){
-        Session s = HibernateUtil.getSessionFactory().openSession();//opens a session and searches for all entities of
-        // the questions class
+    public static Query returnAllQuestions(Session s){
         s.beginTransaction();
         Query returnAllQuestions = s.createQuery("from questions");
         s.getTransaction().commit();
-        s.close();
         return returnAllQuestions;
     }
 
@@ -32,8 +29,7 @@ public class queryDatabase {
      * A method that allows for the searching of questions entities from the database by questionID, type or topic
      * @return - the results of the search inputs
      */
-    public static Query searchQuestions(){
-        Session s = HibernateUtil.getSessionFactory().openSession();
+    public static Query searchQuestions(Session s){
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter a number between 1-3");
         System.out.println("1. Search by question ID");
@@ -59,7 +55,6 @@ public class queryDatabase {
                     //creates a query based of the user input
                     Query searchQuestionID = s.createQuery("from questions q where q.questionID = " + questionID);
                     s.getTransaction().commit();
-                    s.close();
                     return searchQuestionID;
                 case 2:
                     s.beginTransaction();
@@ -75,7 +70,6 @@ public class queryDatabase {
                     Query searchType = s.createQuery("from questions q where q.type = " + type); //creates query
                     //based of user inputs
                     s.getTransaction().commit();
-                    s.close();
                     return searchType;
                 case 3:
                     s.beginTransaction();
@@ -83,7 +77,6 @@ public class queryDatabase {
                     String topic = sc.nextLine(); //uses the user input to create a query for the specified topic
                     Query searchTopic = s.createQuery("from questions q where q.topic = " + topic);
                     s.getTransaction().commit();
-                    s.close();
                     return searchTopic;
             }
         }
@@ -93,13 +86,11 @@ public class queryDatabase {
      * returns all questions previously answered incorrectly by the user
      * @return - list of incorrectly answered questions
      */
-    public static Query viewIncorrectQuestions(){
-        Session s = HibernateUtil.getSessionFactory().openSession();
+    public static Query viewIncorrectQuestions(Session s){
         s.beginTransaction(); //creates a query that returns a list of question with incorrect responses
-        Query incorrectQuestions = s.createQuery("from questions q where " +
-                "q.questionID = responseAnswers.questionID.questionID and responseAnswers.correct = false");
+        Query incorrectQuestions = s.createQuery("select q from questions q, responseAnswers r where " +
+                "q.questionID = r.questionID.questionID and r.correct = false");
         s.getTransaction().commit();
-        s.close();
         return incorrectQuestions;
     }
 
