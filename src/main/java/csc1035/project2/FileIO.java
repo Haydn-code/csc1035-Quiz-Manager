@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class FileIO {
@@ -62,7 +63,7 @@ public class FileIO {
             ExportQuestions(questions,fileName);
             System.out.println("Successfully exported questions");
         } catch (IOException IOE){
-            System.out.println("Failed to export questions to file.");
+            System.out.println("Failed to export questions to file. \n"+IOE);
         }
     }
     public void mnuImport(){
