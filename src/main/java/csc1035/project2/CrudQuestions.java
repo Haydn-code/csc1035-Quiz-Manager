@@ -192,6 +192,12 @@ public class CrudQuestions {
         s.getTransaction().commit();
     }
 
+    /**
+     * Allows the user to select wish question they wish to delete/update
+     * @param s - the hibernate session that is open for the duration of the program
+     * @param sc - the scanner object used to take the users input
+     * @return - the selected question
+     */
     public static Question selectQuestion(Session s, Scanner sc) {
         System.out.println("Please enter the questionID of the question you wish to select");
         while (!sc.hasNextInt()) { //ensures the questionID is an integer
