@@ -7,7 +7,7 @@ import java.security.PublicKey;
 public class QuizQuestions {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false)
     private int QQJD;
 
