@@ -21,6 +21,16 @@ public class Quiz {
     @OneToMany(mappedBy = "quizID")
     private List<Response> responses;
 
+    /**
+     * Defined a new constructor that will be used when creating quizes
+     * @param title - the title of the quiz
+     * @param qQuestions - a list of the QuizQuestions
+     */
+    public Quiz(String title, List<QuizQuestions> qQuestions){
+        this.title = title;
+        this.qQuestions = qQuestions;
+    }
+
     public Quiz(String title, int quizID, List<QuizQuestions> qQuestions, List<Response> responses){
         this.quizID = quizID;
         this.title = title;
