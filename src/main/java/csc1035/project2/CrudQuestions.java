@@ -88,23 +88,8 @@ public class CrudQuestions {
      */
     public static void updateQuestion(Session s) {
         Scanner sc = new Scanner(System.in);
-        Question q2 = null;
-        Query q;
-        s.beginTransaction();
-        do { //ensures that user has selected a question
-            System.out.println("Please enter the question ID of the question you would like to update?");
-            while (!sc.hasNextInt()) { //ensures the questionID is an integer
-                System.out.println("Please enter and integer");
-                sc.nextLine();
-            }
-            int questionID = sc.nextInt();
-            sc.nextLine();
-            //creates a query based of the user input
-            q = s.createQuery("from questions q where q.questionID = " + questionID);
-        } while (q.getResultList().size() == 0);
-        for (Object i : q.getResultList()) {
-            q2 = (Question) i;
-        }
+        System.out.println("Please enter the question ID of the question you would like to update?");
+        Question q = selectQuestion(s, sc);
         boolean loop = true;
         while (loop) { //loops until the user is done updating the question
             //provides a list of options for the user
@@ -115,7 +100,7 @@ public class CrudQuestions {
             System.out.println("4. Change the question topic");
             System.out.println("5. Change the question answers");
             System.out.println("6. Finish and apply changes");
-            System.out.println("Current question is " + q2);
+            System.out.println("Current question is " + q);
             while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer 1-6");
                 sc.nextLine();
@@ -131,25 +116,25 @@ public class CrudQuestions {
                         sc.nextLine();
                     }
                     int newScore = sc.nextInt();
-                    q2.setScore(newScore);
+                    q.setScore(newScore);
                     break;
                 case 2:
                     System.out.println("Please enter the title of the new question");
                     String title = sc.nextLine();
-                    q2.setTitle(title);
+                    q.setTitle(title);
                     break;
                 case 3:
                     boolean type = determineType();
-                    q2.setType(type);
+                    q.setType(type);
                     break;
                 case 4:
                     System.out.println("Please enter the new question topic");
                     String topic = sc.nextLine();
-                    q2.setTopic(topic);
+                    q.setTopic(topic);
                     break;
                 case 5:
                     boolean loop2;
-                    for (QAnswer qA : q2.getQAnswers()) {
+                    for (QAnswer qA : q.getQAnswers()) {
                         System.out.println(qA);
                         loop2 = true;
                         while (loop2) { //loops until the user decides they are finished altering the answer
@@ -175,14 +160,14 @@ public class CrudQuestions {
                                     s.delete(qA);
                                     loop2 = false;
                                 case 4:
-                                    s.save(qA);
+                                    s.update(qA);
                                     loop2 = false;
                             }
                         }
                     }
                     break;
                 case 6://Save changes and causes the method to close
-                    s.save(q2);
+                    s.update(q);
                     loop = false;
                     break;
             }
@@ -196,33 +181,30 @@ public class CrudQuestions {
      */
     public static void deleteQuestion(Session s){
         Scanner sc = new Scanner (System.in);
-        Query q;
-        Question q2 = null;
-        s.beginTransaction();
-        do { //ensures that user has selected a question
-            System.out.println("Please enter the question ID of the question you would like to delete?");
-            while (!sc.hasNextInt()) { //ensures the questionID is an integer
-                System.out.println("Please enter and integer");
-                sc.nextLine();
-            }
-            int questionID = sc.nextInt();
-            sc.nextLine();
-            //creates a query based of the user input
-            q = s.createQuery("from questions q where q.questionID = " + questionID);
-        } while(q.getResultList().size() == 0);
-        for (Object i : q.getResultList()){
-            q2 = (Question) i;
-        }
+        System.out.println("Please enter the question ID of the question you would like to delete?");
+        Question q = selectQuestion(s, sc);
         //deletes the question and other associated entities from the database
-        for (QAnswer qA : q2.getQAnswers()){
+        for (QAnswer qA : q.getQAnswers()){
             s.delete(qA);
         }
-        for (RAnswer rA : q2.getRAnswers()){
+        for (RAnswer rA : q.getRAnswers()){
             s.delete(rA);
         }
-        s.delete(q2);
+        s.delete(q);
         s.getTransaction().commit();
     }
+
+    public static Question selectQuestion(Session s, Scanner sc) {
+        while (!sc.hasNextInt()) { //ensures the questionID is an integer
+            System.out.println("Please enter and integer");
+            sc.nextLine();
+        }
+        int questionID = sc.nextInt();
+        sc.nextLine();
+        s.beginTransaction();
+        return s.get(Question.class, questionID);
+    }
+
     /**
      * This method prevents code duplication across the create and update methods by checking what the user would like
      * to set the question type as
