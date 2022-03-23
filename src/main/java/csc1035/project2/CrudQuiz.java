@@ -143,4 +143,31 @@ public class CrudQuiz {
         s.save(quiz);
         s.getTransaction().commit();
     }
+
+    /**
+     * Defined a method that displays all the quiz's stored in the database to the user
+     * @param s - the hibernate session that is open for the duration of the program
+     */
+    public static void readQuiz(Session s){
+        s.beginTransaction();
+        Query q = s.createQuery("from quizes");
+        for (Object i : q.getResultList()){
+            Quiz quiz = (Quiz) i;
+            System.out.println(quiz);
+        }
+    }
+
+    public static void updateQuiz(Session s){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter the quizID of the quiz you would wish to update");
+        while(!sc.hasNextInt()){
+            System.out.println("The quizID must be an integer");
+            sc.nextLine();
+        }
+        int quizID = sc.nextInt();
+
+    }
+    public static Quiz selectQuiz(Session s, Scanner sc){
+
+    }
 }
