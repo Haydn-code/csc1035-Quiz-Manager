@@ -23,7 +23,7 @@ public class CrudQuestions {
      * allows the user to create questions which are then saved to the database
      * @param s - the hibernate session that is open the full duration of the program
      */
-    public void createQuestion(Session s){
+    public static void createQuestion(Session s){
         Scanner sc = new Scanner(System.in);
         //takes an input from the user and initialises a new Question object based of that data
         System.out.println("Please enter the integer amount of points the question will be worth");
@@ -74,7 +74,7 @@ public class CrudQuestions {
      * Implemented a method that allows the user to read all questions using this class
      * @param s - the hibernate session that is open for the duration of the program
      */
-    public void readQuestions(Session s){
+    public static void readQuestions(Session s){
         Query q = queryDatabase.returnAllQuestions(s);
         for (Object i: q.getResultList()) { //iterates through the results of the query and prints to the console
             Question q2 = (Question) i;
@@ -86,7 +86,7 @@ public class CrudQuestions {
      * This method allows the user to find and update an existing question and it's answers
      * @param s - the hibernate session that is open for the duration of the program
      */
-    public void updateQuestion(Session s) {
+    public static void updateQuestion(Session s) {
         Scanner sc = new Scanner(System.in);
         Question q2 = null;
         Query q;
@@ -188,7 +188,7 @@ public class CrudQuestions {
     /**
      * allows the user to delete a question from the database
      */
-    public void deleteQuestion(Session s){
+    public static void deleteQuestion(Session s){
         Scanner sc = new Scanner (System.in);
         Query q;
         Question q2 = null;
@@ -222,7 +222,7 @@ public class CrudQuestions {
      * to set the question type as
      * @return - the boolean that corresponds to the type selected by the user
      */
-    public boolean determineType(){
+    public static boolean determineType(){
         Scanner sc = new Scanner(System.in);
         while(true){ //ensures that it is one of the two possible question types
             System.out.println("Please enter mcq or saq for the type of question");
@@ -241,7 +241,7 @@ public class CrudQuestions {
      * false
      * @return - whether the answer is correct or not
      */
-    public boolean determineCorrect(){
+    public static boolean determineCorrect(){
         Scanner sc = new Scanner(System.in);
         while(true){
             System.out.println("Please enter the a f if this answer is incorrect and t if its correct");
