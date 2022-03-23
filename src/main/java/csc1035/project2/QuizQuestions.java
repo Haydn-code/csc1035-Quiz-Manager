@@ -64,6 +64,6 @@ public class QuizQuestions {
 
     @Override
     public String toString(){
-        return this.QuestionID.toString();
+        return this.QuestionID.toString() + "QQJD: " + this.QQJD;
     }
 }
