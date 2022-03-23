@@ -61,4 +61,9 @@ public class QuizQuestions {
     public void setQuestionID(Question questionID) {
         QuestionID = questionID;
     }
+
+    @Override
+    public String toString(){
+        return this.QuestionID.toString();
+    }
 }

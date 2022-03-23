@@ -73,4 +73,13 @@ public class Quiz {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    @Override
+    public String toString(){
+        String toString = this.title;
+        for (QuizQuestions qQ : this.qQuestions){
+            toString = toString + "\n" + qQ;
+        }
+        return toString;
+    }
 }
