@@ -4,24 +4,44 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Response class made for responses entity
+ */
+
 @Entity(name = "responses")
 public class Response {
 
+    /**
+     * Primary key - responseID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private int responseID;
 
+    /**
+     * quizID is a foreign key connected to the quizes entity.
+     * It is a many-to-one relation, because one quiz can have more than one response
+     */
     @ManyToOne
     @JoinColumn(nullable = false)
     private Quiz quizID;// foreign key
 
+    /**
+     * rAnswers is mapped to responsesID, will be used in responseAnswers entity.
+     */
     @OneToMany(mappedBy = "responseID")
     private List<RAnswer> rAnswers;
 
+    /**
+     * studentNo column, as name implies will store student number
+     */
     @Column
     private int studentNo;
 
+    /**
+     * result column, as name implies will store result.
+     */
     @Column
     private int result;
 
@@ -33,6 +53,9 @@ public class Response {
         this.result = result;
     }
 
+    /**
+     * no args constructor.
+     */
     public Response() {
 
     }

@@ -4,20 +4,37 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for quizes entity in the database.
+ */
+
 @Entity(name = "quizes")
 public class Quiz {
 
+    /**
+     * Primary key quizID is in number format. It cannot be empty or changed.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private int quizID;
 
+    /**
+     * Title column. As name implies it is in a text format (String in code and varchar(40) in the database).
+     * Should be no more than 40 characters.
+     */
     @Column
     private String title;
 
+    /**
+     * QuizQuestions class (entity "quizQuestions") is mapped to the quizID in Quiz class (entity "quizes").
+     */
     @OneToMany(mappedBy = "QuizID")
     private List<QuizQuestions> qQuestions;
 
+    /**
+     * Response class (entity "responses") is mapped to the quizID in Quiz class (entity "quizes").
+     */
     @OneToMany(mappedBy = "quizID")
     private List<Response> responses;
 
@@ -28,6 +45,9 @@ public class Quiz {
         this.responses = responses;
     }
 
+    /**
+     * No args constructor
+     */
     public Quiz() {
 
     }

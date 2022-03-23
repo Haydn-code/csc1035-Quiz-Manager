@@ -4,32 +4,66 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Question class for entity 'questions' in the databse.
+ */
+
 @Entity(name = "questions")
 public class Question {
 
+    /**
+     * Primary key, questionID.
+     * It is a number format and cannot be changed or empty.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private int questionID;
 
+    /**
+     * Score collumn. Keeps the ammount of points given for this question as a number format.
+     */
     @Column
     private int score;
 
+    /**
+     * Title column. Actual question, kept as a string format in this class and varchar(60) in the database.
+     * Should be no longer than 60 characters.
+     */
     @Column
     private String title;
 
+    /**
+     * Type column. Represents enum in the database which can have either 'mcq' or 'saq'.
+     * mcq - multiple choices question.
+     * saq - short answer question.
+     * True equals mcq and false equals saq.
+     */
     @Column
-    private boolean type; // 0 - mcq  1 - saq
+    private boolean type;
 
+    /**
+     * topic column. holds topic as a string in the class and as varchar(50) in the database.
+     * topic should be no longer than 50 characters.
+     */
     @Column
     private String topic;
 
+    /**
+     * QAnswers class (entity "questionAnswers") is mapped to the questionID in Question class (entity "questions").
+     */
     @OneToMany(mappedBy = "questionID")
     private List<QAnswer> qAnswers;
 
+    /**
+     * QuizQuestions class (entity "qQuestions") is mapped to the questionID in Question class (entity "questions").
+     */
     @OneToMany(mappedBy = "QuestionID")
     private List<QuizQuestions> qQuestions;
 
+    /**
+     * RAnswer class (entity "rAnswers") is mapped to the questionID in Question class (entity "questions").
+     */
     @OneToMany(mappedBy = "questionID")
     private List<RAnswer> rAnswers;
 
@@ -45,6 +79,9 @@ public class Question {
         this.rAnswers = rAnswers;
     }
 
+    /**
+     * No args constructor.
+     */
     public Question() {
 
     }

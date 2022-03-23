@@ -2,22 +2,41 @@ package csc1035.project2;
 
 import javax.persistence.*;
 
+/**
+ * QAnswer class for entity "questionAnswers" in the databse.
+ */
 
 @Entity(name = "questionAnswers")
 public class QAnswer {
 
+    /**
+     * Primary key, answerID.
+     * It is in number format and cannot be changed or empty.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private int answerID;
 
+    /**
+     * Foreign key, questionID refers to the primary key in Question class (entity "questions").
+     * It is many-to-one because there can be more than one different answers submitted for one question.
+     */
     @ManyToOne
     @JoinColumn(nullable = false)
     private Question questionID;
 
+    /**
+     * value column. It holds the submitted answer as a text value (varchar(60) in the database).
+     * It should be no longer than 60 characters.
+     */
     @Column
     private String value;
 
+    /**
+     * correct column. It is an enum with values 'true' and 'false' in the database.
+     * For this reason a boolean is used.
+     */
     @Column
     private boolean correct;
 
@@ -30,6 +49,9 @@ public class QAnswer {
         this.correct = correct;
     }
 
+    /**
+     * No args constructor.
+     */
     public QAnswer() {
 
     }
@@ -71,4 +93,3 @@ public class QAnswer {
         return "QAnswer{ID: " + this.answerID + ",Value: " + this.value + ",Correct: " + this.correct + "}";
     }
 }
-// done
