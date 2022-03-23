@@ -71,7 +71,7 @@ public class CrudQuestions {
             }
 
         }
-        q1.setqAnswers(answers);
+        q1.setQAnswers(answers);
         s.beginTransaction(); //saves the created Question object and respective QAnswer objects to the database
         s.save(q1);
         for (QAnswer q : answers){
@@ -149,6 +149,10 @@ public class CrudQuestions {
                     q2.setType(type);
                 case 4:
                     System.out.println("Please enter the new question topic");
+                    String topic = sc.nextLine();
+                    q2.setTopic(topic);
+                case 5:
+                    for (QAnswer qA : q2.getQAnswers());
             }
         }
         s.getTransaction().commit();

@@ -62,19 +62,19 @@ public class Question {
 
     }
 
-    public List<RAnswer> getrAnswers() {
+    public List<RAnswer> getRAnswers() {
         return rAnswers;
     }
 
-    public void setrAnswers(List<RAnswer> rAnswers) {
+    public void setRAnswers(List<RAnswer> rAnswers) {
         this.rAnswers = rAnswers;
     }
 
-    public List<QuizQuestions> getqQuestions() {
+    public List<QuizQuestions> getQQuestions() {
         return qQuestions;
     }
 
-    public void setqQuestions(List<QuizQuestions> qQuestions) {
+    public void setQQuestions(List<QuizQuestions> qQuestions) {
         this.qQuestions = qQuestions;
     }
 
@@ -118,11 +118,11 @@ public class Question {
         this.topic = topic;
     }
 
-    public List<QAnswer> getqAnswers() {
+    public List<QAnswer> getQAnswers() {
         return qAnswers;
     }
 
-    public void setqAnswers(List<QAnswer> qAnswers) {
+    public void setQAnswers(List<QAnswer> qAnswers) {
         this.qAnswers = qAnswers;
     }
 
