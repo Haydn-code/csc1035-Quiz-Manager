@@ -21,6 +21,17 @@ public class QAnswer {
     @Column
     private boolean correct;
 
+    /**
+     * Defined a constructor for creating a new question answer from scratch
+     * @param correct - if the answer is correct
+     * @param value - the answer
+     * @param questionID - the question that the answer is linked too
+     */
+    public QAnswer (boolean correct, String value, Question questionID){
+        this.correct = correct;
+        this.value = value;
+        this.questionID = questionID;
+    }
 
     public QAnswer (boolean correct, String value, int answerID, Question questionID)
     {

@@ -19,7 +19,7 @@ public class Question {
     private String title;
 
     @Column
-    private boolean type; // 0 - mcq  1 - saq
+    private boolean type; // false - mcq  true - saq
 
     @Column
     private String topic;
@@ -33,6 +33,19 @@ public class Question {
     @OneToMany(mappedBy = "questionID")
     private List<RAnswer> rAnswers;
 
+    /**
+     * Defined a constructor for when creating a question from scratch
+     * @param score - the amount of points the question is worth
+     * @param title - the question
+     * @param type - the type of question
+     * @param topic - the topic the question is on
+     */
+    public Question(int score, String title, boolean type, String topic){
+        this.score = score;
+        this.title = title;
+        this.type = type;
+        this.topic = topic;
+    }
     public Question(int questionID, int score, String title, boolean type, String topic, List<QAnswer> qAnswers,
                     List<QuizQuestions> qQuestions, List<RAnswer> rAnswers){
         this.questionID = questionID;
