@@ -90,8 +90,8 @@ public class CrudQuestions {
         Scanner sc = new Scanner(System.in);
         Question q2 = null;
         Query q;
+        s.beginTransaction();
         do { //ensures that user has selected a question
-            s.beginTransaction();
             System.out.println("Please enter the question ID of the question you would like to update?");
             while (!sc.hasNextInt()) { //ensures the questionID is an integer
                 System.out.println("Please enter and integer");
@@ -198,8 +198,8 @@ public class CrudQuestions {
         Scanner sc = new Scanner (System.in);
         Query q;
         Question q2 = null;
+        s.beginTransaction();
         do { //ensures that user has selected a question
-            s.beginTransaction();
             System.out.println("Please enter the question ID of the question you would like to delete?");
             while (!sc.hasNextInt()) { //ensures the questionID is an integer
                 System.out.println("Please enter and integer");
