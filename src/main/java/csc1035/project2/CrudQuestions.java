@@ -1,6 +1,7 @@
 package csc1035.project2;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -30,19 +31,7 @@ public class CrudQuestions {
             sc.nextLine();
         }
         int score = sc.nextInt();
-        boolean loop = true;
-        boolean type = false;
-        while(loop){ //ensures that it is one of the two possible question types
-            System.out.println("Please enter mcq or saq for the type of question");
-            String temp = sc.nextLine();
-            if (Objects.equals(temp, "mcq")){
-                loop = false;
-            }
-            if (Objects.equals(temp, "saq")){
-                type = true;
-                loop = false;
-            }
-        }
+        boolean type = determineType();
         System.out.println("Please enter the topic of the question");
         String topic = sc.nextLine();
         System.out.println("Please enter the question");
@@ -64,7 +53,7 @@ public class CrudQuestions {
                     //to the question
                     System.out.println("Please enter the possible answer that you wish to add to the question");
                     String value = sc.nextLine();
-                    loop = true;
+                    boolean loop = true;
                     while(loop){
                         System.out.println("Please enter the a f if this answer is incorrect and t if its correct");
                         String temp = sc.nextLine();
@@ -91,4 +80,95 @@ public class CrudQuestions {
         s.getTransaction().commit();
     }
 
+    /**
+     * Implemented a method that allows the user to read all questions using this class
+     * @param s - the hibernate session that is open for the duration of the program
+     */
+    public void readQuestions(Session s){
+        Query q = queryDatabase.returnAllQuestions(s);
+        for (Object i: q.getResultList()) { //iterates through the results of the query and prints to the console
+            Question q2 = (Question) i;
+            System.out.println(q2);
+        }
+    }
+
+    /**
+     * This method allows the user to find and update an existing question and it's answers
+     * @param s - the hibernate session that is open for the duration of the program
+     */
+    public void updateQuestion(Session s){
+        Scanner sc = new Scanner (System.in);
+        Query q = null;
+        Question q2 = null;
+        do { //ensures that user has selected a question
+            s.beginTransaction();
+            System.out.println("Please enter the question ID of the question you would like to update?");
+            while (!sc.hasNextInt()) { //ensures the questionID is an integer
+                System.out.println("Please enter and integer");
+                sc.nextLine();
+            }
+            int questionID = sc.nextInt();
+            sc.nextLine();
+            //creates a query based of the user input
+            q = s.createQuery("from questions q where q.questionID = " + questionID);
+        } while(q.getResultList().size() == 0);
+        for (Object i : q.getResultList()){
+            q2 = (Question) i;
+        }
+        boolean loop = true;
+        while(loop){
+            System.out.println("Please enter an integer 1-6");
+            System.out.println("1. Change the amount of points the question is worth");
+            System.out.println("2. Change the title of the question");
+            System.out.println("3. Change the question type");
+            System.out.println("4. Change the question topic");
+            System.out.println("5. Change the question answers");
+            System.out.println("6. Finish and apply changes");
+            System.out.println("Current question is " + q2);
+            while (!sc.hasNextInt()){
+                System.out.println("Please enter an integer 1-5");
+                sc.nextLine();
+            }
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch(choice){
+                case 1:
+                    System.out.println("Please enter the new score");
+                    while (!sc.hasNextInt()){
+                        System.out.println("Please enter an integer");
+                        sc.nextLine();
+                    }
+                    int newScore = sc.nextInt();
+                    q2.setScore(newScore);
+                case 2:
+                    System.out.println("Please enter the title of the new question");
+                    String title = sc.nextLine();
+                    q2.setTitle(title);
+                case 3:
+                    boolean type = determineType();
+                    q2.setType(type);
+                case 4:
+                    System.out.println("Please enter the new question topic");
+            }
+        }
+        s.getTransaction().commit();
+    }
+
+    /**
+     * This method prevents code duplication across the create and update methods
+     * @return - the boolean that corresponds to the type selected by the user
+     */
+    public boolean determineType(){
+        Scanner sc = new Scanner(System.in);
+        while(true){ //ensures that it is one of the two possible question types
+            System.out.println("Please enter mcq or saq for the type of question");
+            String temp = sc.nextLine();
+            if (Objects.equals(temp, "mcq")){
+                return false;
+            }
+            if (Objects.equals(temp, "saq")){
+                return true;
+            }
+        }
+    }
 }
