@@ -122,22 +122,21 @@ public class menu {
         //will implement function from other class
     }
     private void createQuestion(){
-        //will implement function from other class
+        CrudQuestions.createQuestion(s);
     }
     private void readQuestion(){
-        //will implement function from other class
+        CrudQuestions.readQuestions(s);
     }
     private void updateQuestion(){
-        //will implement function from other class
+        CrudQuestions.updateQuestion(s);
     }
     private void deleteQuestion(){
-        //will implement function from other class
+        CrudQuestions.deleteQuestion(s);
     }
     private void importQuiz(){
         //will implement function from other class
     }
     private void exportQuiz(){
-        //will implement function from other class
         List<Question> questions = new ArrayList<>();
         Query q = queryDatabase.returnAllQuestions(s);
         for (Object i: q.getResultList()){ //iterates through the results of the query and prints to the console
