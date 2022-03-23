@@ -201,7 +201,7 @@ public class CrudQuestions {
     public static Question selectQuestion(Session s, Scanner sc) {
         System.out.println("Please enter the questionID of the question you wish to select");
         while (!sc.hasNextInt()) { //ensures the questionID is an integer
-            System.out.println("Please enter and integer");
+            System.out.println("Please enter an integer");
             sc.nextLine();
         }
         int questionID = sc.nextInt();
