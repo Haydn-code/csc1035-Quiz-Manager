@@ -1,5 +1,6 @@
 package csc1035.project2;
 
+import com.sun.security.jgss.GSSUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -53,18 +54,7 @@ public class CrudQuestions {
                     //to the question
                     System.out.println("Please enter the possible answer that you wish to add to the question");
                     String value = sc.nextLine();
-                    boolean loop = true;
-                    while(loop){
-                        System.out.println("Please enter the a f if this answer is incorrect and t if its correct");
-                        String temp = sc.nextLine();
-                        if (temp == "f"){
-                            loop = false;
-                        }
-                        if (temp == "t"){
-                            correct = true;
-                            loop = false;
-                        }
-                    }
+                    correct = determineCorrect();
                     answers.add(new QAnswer(correct, value, q1));
                 case 2: //allows the user to exit the loop once they have added all the possible answers
                     newAnswer = false;
@@ -152,7 +142,26 @@ public class CrudQuestions {
                     String topic = sc.nextLine();
                     q2.setTopic(topic);
                 case 5:
-                    for (QAnswer qA : q2.getQAnswers());
+                    boolean loop2;
+                    for (QAnswer qA : q2.getQAnswers()) {
+                        System.out.println(qA);
+                        loop2 = true;
+                        while (loop2) {
+                            System.out.println("Please enter an integer 1-3");
+                            System.out.println("1. Change the boolean correct of the answer");
+                            System.out.println("2. Change the answer stored in QAnswer");
+                            System.out.println("3. Finish and apply changes to this QAnswer");
+                            while (!sc.hasNextInt()){
+                                System.out.println("Please enter an integer 1-3");
+                                sc.nextLine();
+                            }
+                            int choice2 = sc.nextInt();
+                            switch(choice2){
+                                case 1:
+                                    qA.setCorrect(determineCorrect());
+                            }
+                        }
+                    }
             }
         }
         s.getTransaction().commit();
@@ -171,6 +180,19 @@ public class CrudQuestions {
                 return false;
             }
             if (Objects.equals(temp, "saq")){
+                return true;
+            }
+        }
+    }
+    public boolean determineCorrect(){
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            System.out.println("Please enter the a f if this answer is incorrect and t if its correct");
+            String temp = sc.nextLine();
+            if (temp == "f"){
+                return false;
+            }
+            if (temp == "t"){
                 return true;
             }
         }
