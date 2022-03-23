@@ -16,7 +16,7 @@ public class Question {
      * It is a number format and cannot be changed or empty.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false)
     private int questionID;
 
@@ -40,7 +40,7 @@ public class Question {
      * True equals mcq and false equals saq.
      */
     @Column
-    private boolean type;
+    private boolean type; // false - mcq  true - saq
 
     /**
      * topic column. holds topic as a string in the class and as varchar(50) in the database.
@@ -67,6 +67,19 @@ public class Question {
     @OneToMany(mappedBy = "questionID")
     private List<RAnswer> rAnswers;
 
+    /**
+     * Defined a constructor for when creating a question from scratch
+     * @param score - the amount of points the question is worth
+     * @param title - the question
+     * @param type - the type of question
+     * @param topic - the topic the question is on
+     */
+    public Question(int score, String title, boolean type, String topic){
+        this.score = score;
+        this.title = title;
+        this.type = type;
+        this.topic = topic;
+    }
     public Question(int questionID, int score, String title, boolean type, String topic, List<QAnswer> qAnswers,
                     List<QuizQuestions> qQuestions, List<RAnswer> rAnswers){
         this.questionID = questionID;
@@ -86,19 +99,19 @@ public class Question {
 
     }
 
-    public List<RAnswer> getrAnswers() {
+    public List<RAnswer> getRAnswers() {
         return rAnswers;
     }
 
-    public void setrAnswers(List<RAnswer> rAnswers) {
+    public void setRAnswers(List<RAnswer> rAnswers) {
         this.rAnswers = rAnswers;
     }
 
-    public List<QuizQuestions> getqQuestions() {
+    public List<QuizQuestions> getQQuestions() {
         return qQuestions;
     }
 
-    public void setqQuestions(List<QuizQuestions> qQuestions) {
+    public void setQQuestions(List<QuizQuestions> qQuestions) {
         this.qQuestions = qQuestions;
     }
 
@@ -142,11 +155,11 @@ public class Question {
         this.topic = topic;
     }
 
-    public List<QAnswer> getqAnswers() {
+    public List<QAnswer> getQAnswers() {
         return qAnswers;
     }
 
-    public void setqAnswers(List<QAnswer> qAnswers) {
+    public void setQAnswers(List<QAnswer> qAnswers) {
         this.qAnswers = qAnswers;
     }
 

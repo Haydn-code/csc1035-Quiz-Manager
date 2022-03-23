@@ -91,13 +91,13 @@ public class menu {
                     exportQuiz();
                     break;
                 case 12:
-                    searchQuestions(queryDatabase.viewIncorrectQuestions(s));
+                    searchQuestions(QueryDatabase.viewIncorrectQuestions(s));
                     break;
                 case 13:
-                    searchQuestions(queryDatabase.returnAllQuestions(s));
+                    searchQuestions(QueryDatabase.returnAllQuestions(s));
                     break;
                 case 14:
-                    searchQuestions(queryDatabase.searchQuestions(s));
+                    searchQuestions(QueryDatabase.searchQuestions(s));
                     break;
                 case 15:
                     loop = false;
@@ -110,36 +110,35 @@ public class menu {
         //will implement function from other class
     }
     private void createQuiz(){
-        //will implement function from other class
+        CrudQuiz.createQuiz(s);
     }
     private void readQuiz(){
-        //will implement function from other class
+        CrudQuiz.readQuiz(s);
     }
     private void updateQuiz(){
-        //will implement function from other class
+        CrudQuiz.updateQuiz(s);
     }
     private void deleteQuiz(){
-        //will implement function from other class
+        CrudQuiz.deleteQuiz(s);
     }
     private void createQuestion(){
-        //will implement function from other class
+        CrudQuestions.createQuestion(s);
     }
     private void readQuestion(){
-        //will implement function from other class
+        CrudQuestions.readQuestions(s);
     }
     private void updateQuestion(){
-        //will implement function from other class
+        CrudQuestions.updateQuestion(s);
     }
     private void deleteQuestion(){
-        //will implement function from other class
+        CrudQuestions.deleteQuestion(s);
     }
     private void importQuiz(){
         //will implement function from other class
     }
     private void exportQuiz(){
-        //will implement function from other class
         List<Question> questions = new ArrayList<>();
-        Query q = queryDatabase.returnAllQuestions(s);
+        Query q = QueryDatabase.returnAllQuestions(s);
         for (Object i: q.getResultList()){ //iterates through the results of the query and prints to the console
             Question q2 = (Question) i;
             questions.add(q2);

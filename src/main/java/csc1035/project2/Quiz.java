@@ -15,7 +15,7 @@ public class Quiz {
      * Primary key quizID is in number format. It cannot be empty or changed.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false)
     private int quizID;
 
@@ -37,6 +37,14 @@ public class Quiz {
      */
     @OneToMany(mappedBy = "quizID")
     private List<Response> responses;
+
+    /**
+     * Defined a new constructor that will be used when creating quiz's
+     * @param title - the title of the quiz
+     */
+    public Quiz(String title){
+        this.title = title;
+    }
 
     public Quiz(String title, int quizID, List<QuizQuestions> qQuestions, List<Response> responses){
         this.quizID = quizID;
@@ -82,5 +90,14 @@ public class Quiz {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString(){
+        String toString = this.title;
+        for (QuizQuestions qQ : this.qQuestions){
+            toString = toString + "\n" + qQ;
+        }
+        return toString;
     }
 }

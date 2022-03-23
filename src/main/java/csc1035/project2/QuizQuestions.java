@@ -14,7 +14,7 @@ public class QuizQuestions {
      * Primary key is QQJD. It is in number format and cannot be changed or empty.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false)
     private int QQJD;
 
@@ -34,6 +34,15 @@ public class QuizQuestions {
     @JoinColumn(nullable = false)
     private Question QuestionID;
 
+    /**
+     * Defined a new constructor to be used in the creation of quizes
+     * @param QuizID - the quiz
+     * @param QuestionID - the question
+     */
+    public QuizQuestions(Quiz QuizID, Question QuestionID){
+        this.QuestionID = QuestionID;
+        this.QuizID = QuizID;
+    }
     public QuizQuestions(int QQJD, Quiz QuizID, Question QuestionID){
         this.QQJD = QQJD;
         this.QuestionID = QuestionID;
@@ -69,5 +78,10 @@ public class QuizQuestions {
 
     public void setQuestionID(Question questionID) {
         QuestionID = questionID;
+    }
+
+    @Override
+    public String toString(){
+        return this.QuestionID.toString() + "QQJD: " + this.QQJD;
     }
 }
