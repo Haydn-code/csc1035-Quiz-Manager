@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class QAnswer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false)
     private int answerID;
 
