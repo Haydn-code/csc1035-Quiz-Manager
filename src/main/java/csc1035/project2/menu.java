@@ -110,16 +110,16 @@ public class menu {
         //will implement function from other class
     }
     private void createQuiz(){
-        //will implement function from other class
+        CrudQuiz.createQuiz(s);
     }
     private void readQuiz(){
-        //will implement function from other class
+        CrudQuiz.readQuiz(s);
     }
     private void updateQuiz(){
-        //will implement function from other class
+        CrudQuiz.updateQuiz(s);
     }
     private void deleteQuiz(){
-        //will implement function from other class
+        CrudQuiz.deleteQuiz(s);
     }
     private void createQuestion(){
         CrudQuestions.createQuestion(s);
