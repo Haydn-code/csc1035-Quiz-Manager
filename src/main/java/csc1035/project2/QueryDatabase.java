@@ -7,11 +7,11 @@ import org.hibernate.query.Query;
 /**
  * Created a class which will be used to query the database
  */
-public class queryDatabase {
+public class QueryDatabase {
     /**
      * Defined a constructor
      */
-    public queryDatabase(){
+    public QueryDatabase(){
     }
 
     /**

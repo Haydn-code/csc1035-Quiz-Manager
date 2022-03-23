@@ -75,7 +75,7 @@ public class CrudQuestions {
      * @param s - the hibernate session that is open for the duration of the program
      */
     public static void readQuestions(Session s){
-        Query q = queryDatabase.returnAllQuestions(s);
+        Query q = QueryDatabase.returnAllQuestions(s);
         for (Object i: q.getResultList()) { //iterates through the results of the query and prints to the console
             Question q2 = (Question) i;
             System.out.println(q2);
@@ -132,17 +132,21 @@ public class CrudQuestions {
                     }
                     int newScore = sc.nextInt();
                     q2.setScore(newScore);
+                    break;
                 case 2:
                     System.out.println("Please enter the title of the new question");
                     String title = sc.nextLine();
                     q2.setTitle(title);
+                    break;
                 case 3:
                     boolean type = determineType();
                     q2.setType(type);
+                    break;
                 case 4:
                     System.out.println("Please enter the new question topic");
                     String topic = sc.nextLine();
                     q2.setTopic(topic);
+                    break;
                 case 5:
                     boolean loop2;
                     for (QAnswer qA : q2.getQAnswers()) {
@@ -176,9 +180,11 @@ public class CrudQuestions {
                             }
                         }
                     }
+                    break;
                 case 6://Save changes and causes the method to close
                     s.save(q2);
                     loop = false;
+                    break;
             }
         }
         //Commit changes to the database

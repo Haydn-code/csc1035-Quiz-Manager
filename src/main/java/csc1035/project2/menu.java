@@ -91,13 +91,13 @@ public class menu {
                     exportQuiz();
                     break;
                 case 12:
-                    searchQuestions(queryDatabase.viewIncorrectQuestions(s));
+                    searchQuestions(QueryDatabase.viewIncorrectQuestions(s));
                     break;
                 case 13:
-                    searchQuestions(queryDatabase.returnAllQuestions(s));
+                    searchQuestions(QueryDatabase.returnAllQuestions(s));
                     break;
                 case 14:
-                    searchQuestions(queryDatabase.searchQuestions(s));
+                    searchQuestions(QueryDatabase.searchQuestions(s));
                     break;
                 case 15:
                     loop = false;
@@ -138,7 +138,7 @@ public class menu {
     }
     private void exportQuiz(){
         List<Question> questions = new ArrayList<>();
-        Query q = queryDatabase.returnAllQuestions(s);
+        Query q = QueryDatabase.returnAllQuestions(s);
         for (Object i: q.getResultList()){ //iterates through the results of the query and prints to the console
             Question q2 = (Question) i;
             questions.add(q2);
