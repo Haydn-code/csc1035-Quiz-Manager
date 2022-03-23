@@ -88,7 +88,6 @@ public class CrudQuestions {
      */
     public static void updateQuestion(Session s) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Please enter the question ID of the question you would like to update?");
         Question q = selectQuestion(s, sc);
         boolean loop = true;
         while (loop) { //loops until the user is done updating the question
@@ -181,7 +180,6 @@ public class CrudQuestions {
      */
     public static void deleteQuestion(Session s){
         Scanner sc = new Scanner (System.in);
-        System.out.println("Please enter the question ID of the question you would like to delete?");
         Question q = selectQuestion(s, sc);
         //deletes the question and other associated entities from the database
         for (QAnswer qA : q.getQAnswers()){
@@ -195,6 +193,7 @@ public class CrudQuestions {
     }
 
     public static Question selectQuestion(Session s, Scanner sc) {
+        System.out.println("Please enter the questionID of the question you wish to select");
         while (!sc.hasNextInt()) { //ensures the questionID is an integer
             System.out.println("Please enter and integer");
             sc.nextLine();
