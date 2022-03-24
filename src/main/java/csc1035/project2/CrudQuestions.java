@@ -89,7 +89,7 @@ public class CrudQuestions {
     public static void updateQuestion(Session s) {
         Scanner sc = new Scanner(System.in);
         Question q = selectQuestion(s, sc);
-        boolean loop = true;
+        boolean loop = true;s.beginTransaction();
         while (loop) { //loops until the user is done updating the question
             //provides a list of options for the user
             System.out.println("Please enter an integer 1-6");
@@ -181,6 +181,7 @@ public class CrudQuestions {
     public static void deleteQuestion(Session s){
         Scanner sc = new Scanner (System.in);
         Question q = selectQuestion(s, sc);
+        s.beginTransaction();
         //deletes the question and other associated entities from the database
         for (QAnswer qA : q.getQAnswers()){
             s.delete(qA);
@@ -207,7 +208,9 @@ public class CrudQuestions {
         int questionID = sc.nextInt();
         sc.nextLine();
         s.beginTransaction();
-        return s.get(Question.class, questionID);
+        Question q =  s.get(Question.class, questionID);
+        s.getTransaction().commit();
+        return q;
     }
 
     /**

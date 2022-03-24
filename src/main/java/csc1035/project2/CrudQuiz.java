@@ -98,7 +98,6 @@ public class CrudQuiz {
         boolean loop = true;
         Quiz quiz = new Quiz(title);
         List<QuizQuestions> quizQuestions = new ArrayList<QuizQuestions>();
-        s.beginTransaction();
         while (loop){
             System.out.println("Please enter a number 1-3");
             System.out.println("1. Add another question to the quiz");
@@ -114,7 +113,9 @@ public class CrudQuiz {
                 case 1:
                     Question q = CrudQuestions.selectQuestion(s, sc);
                     QuizQuestions qQ = new QuizQuestions(quiz, q);
+                    s.beginTransaction();
                     s.save(qQ);
+                    s.getTransaction().commit();
                     quizQuestions.add(qQ);
                     break;
                 case 2:
@@ -130,6 +131,7 @@ public class CrudQuiz {
             }
         }
         quiz.setqQuestions(quizQuestions);
+        s.beginTransaction();
         s.save(quiz);
         s.getTransaction().commit();
     }
@@ -154,7 +156,6 @@ public class CrudQuiz {
      */
     public static void updateQuiz(Session s){
         Scanner sc = new Scanner(System.in);
-        s.beginTransaction();
         Quiz quiz = selectQuiz(s, sc); //allows the user to select which quiz they wish to update
         boolean loop = true;
         while (loop) { //code will loop until the user decides they have finished updating the quiz
@@ -174,7 +175,9 @@ public class CrudQuiz {
                     Question q = CrudQuestions.selectQuestion(s, sc);//allows the user to select which question they
                     //wish to add to the quiz
                     QuizQuestions qQ = new QuizQuestions(quiz, q);
+                    s.beginTransaction();
                     s.save(qQ);
+                    s.getTransaction().commit();
                     List<QuizQuestions> qQuestions = quiz.getqQuestions();
                     qQuestions.add(qQ);
                     break;
@@ -187,13 +190,16 @@ public class CrudQuiz {
                     }
                     int QQJD = sc.nextInt();
                     sc.nextLine();
+                    s.beginTransaction();
                     QuizQuestions qQ1 = s.get(QuizQuestions.class, QQJD);
                     s.delete(qQ1);
+                    s.getTransaction().commit();
                     List<QuizQuestions> qQL = quiz.getqQuestions();
                     qQL.remove(qQ1);
                     quiz.setqQuestions(qQL);
                 case 3:
                     //Apply changes to the database and ends the loop
+                    s.beginTransaction();
                     s.update(quiz);
                     s.getTransaction().commit();
                     loop = false;
@@ -207,8 +213,8 @@ public class CrudQuiz {
      */
     public static void deleteQuiz(Session s){
         Scanner sc = new Scanner(System.in);
-        s.beginTransaction();
         Quiz quiz = selectQuiz(s, sc);
+        s.beginTransaction();
         for (QuizQuestions qQ : quiz.getqQuestions()){//iterates through all the relationships between this
             // quiz and questions and deletes them from the database accordingly
             s.delete(qQ);
@@ -225,6 +231,8 @@ public class CrudQuiz {
         int quizID = sc.nextInt();
         sc.nextLine();
         s.beginTransaction();
-        return s.get(Quiz.class, quizID);
+        Quiz quiz = s.get(Quiz.class, quizID);
+        s.getTransaction().commit();
+        return quiz;
     }
 }
