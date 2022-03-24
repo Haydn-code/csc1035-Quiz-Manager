@@ -147,6 +147,7 @@ public class CrudQuiz {
         for (Object i : q.getResultList()){
             Quiz quiz = (Quiz) i;
             System.out.println(quiz);
+            s.getTransaction().commit();
         }
     }
 
