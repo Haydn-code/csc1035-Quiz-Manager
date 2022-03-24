@@ -1,5 +1,5 @@
-Programming Portfolio (2)
-===========
+CSC1035 Project 2 (Team Project)
+================================
 
 This package is build as a part of the Programming Portfolio (2) - CSC1035 and CSC1036
 
